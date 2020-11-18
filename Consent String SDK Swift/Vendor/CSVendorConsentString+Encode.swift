@@ -62,11 +62,11 @@ extension CSVendorConsentString {
             return "10"
         }
         
-        var rangeViewOptIn = "10" + pad(string: String(NSIndexSet(indexSet: self.vendorAllowed).rangeCount(), radix:2), toSize: CSConstantes.sizeVendorOfNumEntries)
+        var rangeViewOptIn = "10" + pad(string: String(self.vendorAllowed.rangeView.count, radix:2), toSize: CSConstantes.sizeVendorOfNumEntries)
         rangeViewOptIn = rangeViewOptIn + encodeIndex(index: self.vendorAllowed)
         
         let indexOptOut = IndexSet(integersIn: 1...Int(self.maxVendorId)).subtracting(self.vendorAllowed)
-        var rangeViewOptOut = "11" + pad(string: String(NSIndexSet(indexSet: indexOptOut).rangeCount(), radix:2), toSize: CSConstantes.sizeVendorOfNumEntries)
+        var rangeViewOptOut = "11" + pad(string: String(indexOptOut.rangeView.count, radix:2), toSize: CSConstantes.sizeVendorOfNumEntries)
         rangeViewOptOut = rangeViewOptOut + encodeIndex(index: indexOptOut)
         
         return rangeViewOptIn.count > rangeViewOptOut.count ? rangeViewOptOut : rangeViewOptIn
